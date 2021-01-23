@@ -1,0 +1,22 @@
+﻿@model Networking_Project.Models.User
+
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@using (Html.BeginForm("EditUserDetails", "User", FormMethod.Post))
+{
+    <b>First Name :</b> @Html.TextBoxFor(m => m.FirstName, new { Value = "Sagiv" }) @Html.ValidationMessageFor(m => m.FirstName)
+    <br />
+    <b>Last Name : </b> @Html.TextBoxFor(m => m.LastName, new { Value = "Talker" }) @Html.ValidationMessageFor(m => m.LastName)
+    <br />
+    <b>Phone Number : </b> @Html.TextBoxFor(m => m.PhoneNumber, new { Value = "0526699863" }) @Html.ValidationMessageFor(m => m.PhoneNumber)
+    <br />
+    <b>Password : </b> @Html.TextBoxFor(m => m.Password, new { Value = "123456" }) @Html.ValidationMessageFor(m => m.Password)
+    <br />
+    <b>Birth Date : </b> @Html.EditorFor(m => m.BirthDate, new { Value = 30 / 06 / 1992 }) @Html.ValidationMessageFor(m => m.BirthDate)
+    <br />
+
+    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+    <input id="Edit" type="submit" value="Edit User" />
+}

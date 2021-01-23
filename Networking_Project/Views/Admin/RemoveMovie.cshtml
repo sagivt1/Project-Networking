@@ -1,0 +1,25 @@
+﻿@model Networking_Project.Dal.MovieDal
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div>
+    @using (Html.BeginForm("RemoveMovie", "Admin", FormMethod.Post))
+    {
+    <select name="MovieN">
+        <option selected value="0">---Select---</option>
+        @{
+            foreach (var movie in Model.MyList)
+            {
+                <option value="@movie.MovieName">@movie.MovieName</option>
+            }
+        }
+    </select>
+        <br />
+        <input type="submit" value="Remove" />
+    }
+</div>
+
+

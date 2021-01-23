@@ -1,0 +1,54 @@
+﻿@model Networking_Project.Dal.MovieDal
+
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@using (Html.BeginForm("Movies", "User", FormMethod.Get))
+{
+    <input type="submit" value="Price" />
+    <select name="OrderBy">
+        <option selected value="0">---Price---</option>
+        <option value="Low To High">Low To High</option>
+        <option value="High To Low">High To Low</option>
+    </select>
+}
+
+@using (Html.BeginForm("Movies", "User", FormMethod.Get))
+{
+    <input type="submit" value="Popular" />
+    <select name="OrderBy">
+        <option selected value="0">---Popular---</option>
+        <option value="Most Popular">Most Popular</option>
+        <option value="Less Popular">Less Popular</option>
+    </select>
+}
+
+@using (Html.BeginForm("Movies", "User", FormMethod.Get))
+{
+    <input type="submit" value="Category" />
+    <select name="OrderBy">
+        <option selected value="0">---Category---</option>
+        @foreach (var cat in Model.Categores)
+        {
+            <option value=@cat>@cat</option>
+        }
+    </select>
+}
+
+<h1>
+    <p style="text-align:center">
+        Movies
+    </p>
+</h1>
+@foreach (var m in Model.MyList)
+{
+    <p style="text-align:center">
+        <img src="@m.PosterPath" alt=@m.PosterPath style=" width: 300; height: 300;" />
+        <br />
+        <input type="button" value="Buy Ticket" onclick="location.href='@Url.Action("Movie", "User", new {id = m.ID })'" />
+        <br />
+        <br />
+    </p>
+}
+

@@ -1,0 +1,46 @@
+﻿@model Networking_Project.Models.MovieShow
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2><p style="text-align:center">Welcome Admin</p></h2>
+<hr />
+
+@if (Model.MovieName != "")
+{
+    <div style="">
+        <h2>
+            NEXT SHOW
+        </h2>
+    </div>
+    <hr />
+
+    <div style="text-align:center">
+        <h2>
+            @Model.MovieName
+        </h2>
+    </div>
+    <br />
+
+    <p style="text-align:center">
+        <img src="@Model.Path" alt="@Model.Path" />
+    </p>
+    <div style="text-align:center">
+        <h2>
+            @Model.Time
+        </h2>
+    </div>
+    <br />
+    <div style="text-align:center">
+        <h2>
+            HALL - @Model.Hall
+        </h2>
+    </div>
+    <br />
+}
+
+
+
+
+

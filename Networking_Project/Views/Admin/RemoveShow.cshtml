@@ -1,0 +1,24 @@
+﻿@model Networking_Project.Dal.ShowDal
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>RemoveShow</h2>
+<div>
+    @using (Html.BeginForm("RemoveShow", "Admin", FormMethod.Post))
+    {
+        <select name="ShowId">
+            <option selected value="0">---Select---</option>
+            @{
+                foreach (var show in Model.MyList)
+                {
+                        <option value="@show.ID">@show.hall @show.dateTime</option>
+                }
+            }
+        </select>
+        <br />
+        <input type="submit" value="Remove" />
+    }
+</div>
+

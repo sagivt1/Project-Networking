@@ -1,0 +1,37 @@
+﻿@model Networking_Project.Dal.UserOrdersDal
+
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>Account</h2>
+
+First Name : @Model.user.FirstName <br />
+Last Name : @Model.user.LastName <br />
+
+<input type="button" value="Edit" onclick="location.href='@Url.Action("Edit", "User",new { Model.user.Email })'" />
+<hr />
+
+<table style="width:50%">
+
+    <tr>
+        <th>Order NO.</th>
+        <th>Price</th>
+        <th>Date Of Order</th>
+    </tr>
+
+
+    <h2>Order History</h2>
+    @foreach (var order in Model.orders)
+    {
+        <tr>
+            <td>@order.OrderId</td>
+            <td>@order.Price</td>
+            <td>@order.TimeOut.Date.ToString("dd/MM/yyyy")</td>
+        </tr>
+    }
+
+
+
+
+    </table>

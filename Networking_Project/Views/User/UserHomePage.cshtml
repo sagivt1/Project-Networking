@@ -1,0 +1,43 @@
+﻿@model Networking_Project.Dal.UserMovieShowDal
+
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+
+<h2><p style="text-align:center">Welcome @Model.user.FirstName.ToUpper()</p></h2>
+<hr />
+
+
+@if (Model.movieShow.MovieName != "")
+{
+    <div style="">
+        <h2>
+            NEXT SHOW
+        </h2>
+    </div>
+    <hr />
+
+    <div style="text-align:center">
+        <h2>
+            @Model.movieShow.MovieName
+        </h2>
+    </div>
+    <br />
+
+    <p style="text-align:center">
+        <img src="@Model.movieShow.Path" alt="@Model.movieShow.Path" />
+    </p>
+    <div style="text-align:center">
+        <h2>
+            @Model.movieShow.Time
+        </h2>
+    </div>
+    <br />
+    <div style="text-align:center">
+        <h2>
+            HALL - @Model.movieShow.Hall
+        </h2>
+    </div>
+    <br />
+}

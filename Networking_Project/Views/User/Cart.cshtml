@@ -1,0 +1,112 @@
+﻿@model Networking_Project.Dal.OrderDal
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>Cart</h2>
+
+
+@if (Model != null)
+{
+    <table style="width:100%">
+        <tr>
+            <th>Movie</th>
+            <th>Time</th>
+            <th>Hall</th>
+            <th>Row</th>
+            <th>Col</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+
+        @foreach (var temp in Model.MyList)
+        {
+            <tr>
+                <td>@temp.movie.MovieName</td>
+                <td>@temp.show.dateTime</td>
+                <td>@temp.show.hall</td>
+                <td>@temp.ticket.SeatRow</td>
+                <td>@temp.ticket.SeatCol</td>
+                <td>@temp.ticket.Price</td>
+                <td>
+                    <input id="Button1" name="submit" type="button" value="Remove"
+                           onclick="location.href='@Url.Action("RemoveFromCart", "User",new {
+                                                  temp.ticket.ShowId, temp.ticket.SeatRow, temp.ticket.SeatCol})'" />
+                </td>
+            </tr>
+        }
+    </table>
+
+
+    <div style="text-align:center">
+        <h4>Total Coast - @Model.order.Price</h4>
+    </div>
+    <br />
+    if (Model.order.Price > 0)
+    {
+        //<input id="Button1" type="button" value="Pay With Credit Card" onclick="location.href='@Url.Action("Pay", "Home")'" style="text-align:center" />
+
+        <div id="smart-button-container">
+            <div style="text-align: center; width: 15%">
+                <div id="paypal-button-container" ;></div>
+            </div>
+        </div>
+
+
+        <div id="smart-button-container" ;>
+            <div style="text-align: center; ">
+                <div id="paypal-button-container" ;></div>
+            </div>
+        </div>
+
+        <div style="width: 12%;">
+            <script src="https://www.paypal.com/sdk/js?client-id=Aelr0v3WieTOv062sI55upKnHeXh6e22nxYxsPZ2vgOXhhrFX16VsY69xQyb3P9BvfJ4wmjM5hN9pvpL&currency=USD" data-sdk-integration-source="button-factory"></script>
+            <script>
+        function initPayPalButton() {
+            paypal.Buttons({
+                style: {
+                    shape: 'rect',
+                    color: 'gold',
+                    layout: 'vertical',
+                    label: 'checkout',
+                },
+
+
+                createOrder: function (data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{ "amount": { "currency_code": "USD", "value": @Model.order.Price } }]
+                    });
+                },
+
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function (details) {
+                        alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                        window.location.href = '@Url.Action("Payed", "User")';
+                    });
+                },
+
+                onError: function (err) {
+                    window.location.href = '@Url.Action("Payed", "User")';
+                }
+            }).render('#paypal-button-container');
+        }
+        initPayPalButton();
+            </script>
+        </div>
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

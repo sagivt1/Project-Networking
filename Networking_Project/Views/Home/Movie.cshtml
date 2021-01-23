@@ -1,0 +1,106 @@
+﻿@model Networking_Project.Dal.MoviesShowDal
+
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+@using (Html.BeginForm("BuyTicket", "Home", FormMethod.Get))
+{
+    <div style="text-align:center">
+        <h2>
+            @Model.movie.MovieName
+        </h2>
+    </div>
+    <hr />
+
+    <p style="text-align:center">
+        <img src="@Model.movie.PosterPath" alt="@Model.movie.PosterPath" />
+    </p>
+
+
+    if (@Model.movie.Discount == 0)
+    {
+        <div style="text-align:center">
+            <h4>
+                Price - @Model.movie.Price $
+            </h4>
+        </div>
+    }
+    else
+    {
+        <div style="text-align:center">
+            <h4>
+                <del>
+                    Price - @Model.movie.Price $
+                </del>
+            </h4>
+        </div>
+
+        <div style="text-align:center">
+            <h4>
+                Discounted Price - @ViewData["DescountPrice"] $
+            </h4>
+        </div>
+    }
+
+    <div style="text-align:center">
+        <h4>
+
+            Length - @Model.movie.MovieLength Minutes
+
+        </h4>
+    </div>
+    <div style="text-align:center">
+        <h4>
+            Age Limit - @Model.movie.AgeLimit
+
+        </h4>
+    </div>
+
+    <div style="text-align:center">
+        <h4>
+            @foreach (var cat in Model.movie.ListOfCategory)
+            {
+                <span>@cat </span>
+
+            }
+        </h4>
+    </div>
+
+    if (Model.MyShows.Any())
+    {
+        <div style="text-align:center">
+            <select name="ShowId">
+                <option selected value="0">---Select---</option>
+                @{
+                    foreach (var show in Model.MyShows)
+                    {
+                        <option value="@show.ID">HALL - @show.hall DATE - @show.dateTime</option>
+                    }
+                }
+            </select>
+        </div>
+
+
+        <br />
+        <div style="text-align:center">
+            <input type="submit" value="Buy Ticket" />
+        </div>
+    }
+    else
+    {
+        <div style="text-align:center">
+            <h4>There Are No Show Yet</h4>
+        </div>
+
+
+    }
+
+
+
+}
+
+
+
+
+

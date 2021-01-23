@@ -1,0 +1,78 @@
+﻿@model Networking_Project.Dal.MovieShowDal
+
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("BuyTicket", "User", FormMethod.Post))
+{
+
+    <div style="text-align:center">
+        <h2>
+            @Model.movie.MovieName
+        </h2>
+    </div>
+    <hr />
+
+    <p style="text-align:center">
+        <img src="@Model.movie.PosterPath" alt="@Model.movie.PosterPath" />
+    </p>
+
+    <div style="text-align:center">
+        <h2>
+            @Model.showtime.dateTime
+        </h2>
+    </div>
+
+    <div style="text-align:center">
+        <h2>
+            HALL - @Model.hall.ID
+        </h2>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("input:checkbox").on('click', function () {
+                var $box = $(this);
+                if ($box.is(":checked")) {
+                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                    $(group).prop("checked", false);
+                    $box.prop("checked", true);
+                } else {
+                    $box.prop("checked", false);
+                }
+            });
+        });
+    </script>
+    <div style="text-align:center">
+
+        @for (int i = 0; i < Model.hall.TotalCol; i++)
+        {
+            for (int j = 0; j < Model.hall.TotalRow; j++)
+            {
+                if (Model.arr[i, j] == false)
+                {
+                    <input id="Checkbox1" type="checkbox" name="mobil[1][]" value="@i,@j,@Model.showtime.ID,@Model.Price" />
+                    <label for="Checkbox1">@i@j </label>
+                }
+                else
+                {
+                    <input id="Checkbox1" type="checkbox" name="mobil[1][]" disabled="disabled" />
+                    <label for="Checkbox1" style="color:lightgreen">@i@j </label>
+                }
+            }
+            <br />
+        }
+    </div>
+
+    <div style="text-align:center">
+        <input type="submit" value="Add To Cart" />
+    </div>
+
+
+}
+
+
+
