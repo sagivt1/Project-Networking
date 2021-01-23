@@ -81,8 +81,9 @@ namespace Networking_Project.Controllers
             return View(data);
         }
         [HttpPost]
-        public ActionResult AddShow(int hallId, string MovieName, DateTime time)
+        public ActionResult AddShow(int hallId, string MovieName, DateTime time = default)
         {
+
             if(hallId == 0 || MovieName == "0" || time == null)
             {
                 string msg = "You need to fill the details of the new show";

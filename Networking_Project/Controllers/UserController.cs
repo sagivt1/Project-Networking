@@ -112,6 +112,10 @@ namespace Networking_Project.Controllers
         [HttpGet]
         public ActionResult BuyTicket(int ShowId)
         {
+            if (ShowId == 0)
+            {
+                return RedirectToAction("Movies");
+            }
             MovieShowDal ms = new MovieShowDal();
             ms.GetShow(ShowId);
             return View(ms);

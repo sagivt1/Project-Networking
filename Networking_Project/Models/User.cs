@@ -30,7 +30,7 @@ namespace Networking_Project.Models
         public bool isAdmin { get; set; }
         [DisplayName("Birthdate")]
         [Required]
-        [RegularExpression("(^((((0[1-9])|([1-2][0-9])|(3[0-1]))|([1-9]))\x2F(((0[1-9])|(1[0-2]))|([1-9]))\x2F(([0-9]{2})|(((19)|([2]([0]{1})))([0-9]{2}))))$)")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime BirthDate { get; set; }
 
 
@@ -100,6 +100,21 @@ namespace Networking_Project.Models
             command.Parameters.AddWithValue("?BirthDate", BirthDate);
             command.ExecuteNonQuery();
             connection.Close();
+        }
+
+        public bool CheckValidMail()
+        {
+            MySqlConnection connection = new MySqlConnection(Global.MyServer);
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT email FROM user WHERE email = ?mail;";
+            command.Parameters.AddWithValue("?mail", Email);
+            MySqlDataReader rdr = command.ExecuteReader();
+            if(rdr.Read())
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

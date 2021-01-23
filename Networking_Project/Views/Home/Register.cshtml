@@ -9,10 +9,13 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/moment.js"></script>
 }
 
-<h2>Register</h2>
 
+
+<h2>Register</h2>
+<h4>@ViewData["msg"]</h4>
 @using (Html.BeginForm("SumbitToDatabase", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()

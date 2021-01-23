@@ -22,8 +22,9 @@ namespace Networking_Project.Controllers
             return View();
         }
 
-        public ActionResult Register()
+        public ActionResult Register(string msg)
         {
+            ViewData["msg"] = msg;
             return View();
         }
 
@@ -55,6 +56,11 @@ namespace Networking_Project.Controllers
 
         public ActionResult SumbitToDatabase(User user)
         {
+            if(user.CheckValidMail())
+            {
+                string msg = "Email already in use";
+                return RedirectToAction("Register","Home",new { msg });
+            }
             user.AddToDB();
             return View("Login");
         }
@@ -74,6 +80,10 @@ namespace Networking_Project.Controllers
         [HttpGet]
         public ActionResult BuyTicket(int ShowId)
         {
+            if(ShowId == 0 )
+            {
+                return RedirectToAction("Movies");
+            }
             MovieShowDal ms = new MovieShowDal();
             ms.GetShow(ShowId);
             return View(ms);
