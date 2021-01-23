@@ -84,8 +84,13 @@ namespace Networking_Project.Controllers
 
         public ActionResult EditUserDetails(User user)
         {
+            HttpCookie MyCookie = Request.Cookies["UserEmail"];
+            user.Email = MyCookie.Value;
             user.UpdateInDb();
-            return View("Account",user);
+            UserOrdersDal uo = new UserOrdersDal();
+            uo.user = user;
+            uo.GetUserOrder();
+            return View("Account",uo);
         }
 
         public ActionResult Edit()
@@ -112,7 +117,7 @@ namespace Networking_Project.Controllers
         [HttpGet]
         public ActionResult BuyTicket(int ShowId)
         {
-            if (ShowId == 0)
+             if(ShowId == 0 )
             {
                 return RedirectToAction("Movies");
             }
