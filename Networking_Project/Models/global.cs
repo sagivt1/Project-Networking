@@ -7,6 +7,6 @@ namespace Networking_Project.Models
 {
     public static class Global
     {
-        public static string MyServer = "server=localhost;user=root;database=cinema;port=3306;password=2791579108;";
+        public static string MyServer = "server=localhost;user=root;database=cinema;port=3306;password=PASSWORD;";
     }
 }
