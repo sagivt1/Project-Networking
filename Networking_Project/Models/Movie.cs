@@ -14,13 +14,17 @@ namespace Networking_Project.Models
         [Required]
         public string MovieName { get; set; }
         [Required]
+        [Range(1, float.MaxValue, ErrorMessage = "Only positive number allowed")]
         public float Price { get; set; }
         [DisplayName("Discount In Percentage")]
+        [Range(1, int.MaxValue, ErrorMessage = "Only positive number allowed")]
         public int Discount { get; set; }
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Only positive number allowed")]
         [DisplayName("Movie Length")]
         public int MovieLength { get; set; }
         [Required]
+        [RegularExpression(@"^[0-9]{1,2}$")]
         [DisplayName("Age Limit")]
         public int AgeLimit { get; set; }
         [DisplayName("Sale")]
